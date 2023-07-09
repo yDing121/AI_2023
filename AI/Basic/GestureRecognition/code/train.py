@@ -47,7 +47,7 @@ model = tf.keras.Sequential(
         tf.keras.layers.Dense(units=50, activation="relu", input_shape=(42,)),
         tf.keras.layers.Dropout(rate=0.1),
         tf.keras.layers.Dense(units=50, activation="relu"),
-        # tf.keras.layers.Dropout(rate=0.1),
+        tf.keras.layers.Dropout(rate=0.1),
         tf.keras.layers.Dense(units=3, activation="softmax")
     ]
 )
@@ -63,9 +63,9 @@ lr_sched = tf.keras.callbacks.LearningRateScheduler(lambda epoch: 1e-3 * 10**(ep
 
 # Training
 history = model.fit(
-    x,
-    y,
-    epochs=20,
+    x_train,
+    y_train,
+    epochs=25,
     # callbacks=lr_sched
 )
 
