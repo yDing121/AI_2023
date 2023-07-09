@@ -1,0 +1,565 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <title>2.3. 模型推理 · GitBook</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.0.0">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-katex/katex.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="2.2.模型环境搭建.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    手部关键点检测
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../chapter1/">
+            
+                <a href="../chapter1/">
+            
+                    
+                    1. 手部关键点检测原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../chapter1/1.1.手部关键点检测概述.html">
+            
+                <a href="../chapter1/1.1.手部关键点检测概述.html">
+            
+                    
+                    1.1. 手部关键点检测概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../chapter1/1.2.手部关键点检测原理.html">
+            
+                <a href="../chapter1/1.2.手部关键点检测原理.html">
+            
+                    
+                    1.2. 手部关键点检测原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    2. 模型推理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="2.1.模型结构可视化.html">
+            
+                <a href="2.1.模型结构可视化.html">
+            
+                    
+                    2.1. 模型结构可视化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="2.2.模型环境搭建.html">
+            
+                <a href="2.2.模型环境搭建.html">
+            
+                    
+                    2.2. 模型环境搭建
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.3" data-path="2.3.模型推理.html">
+            
+                <a href="2.3.模型推理.html">
+            
+                    
+                    2.3. 模型推理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >2.3. 模型推理</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="23-&#x6A21;&#x578B;&#x63A8;&#x7406;">2.3. &#x6A21;&#x578B;&#x63A8;&#x7406;</h1>
+<h2 id="&#x5B66;&#x4E60;&#x76EE;&#x6807;">&#x5B66;&#x4E60;&#x76EE;&#x6807;</h2>
+<ul>
+<li>&#x76EE;&#x6807;<ul>
+<li>&#x638C;&#x63E1;&#x6A21;&#x578B;&#x63A8;&#x7406;</li>
+</ul>
+</li>
+<li>&#x5E94;&#x7528;<ul>
+<li>&#x5E94;&#x7528;&#x6A21;&#x578B;&#x68C0;&#x6D4B;&#x624B;&#x90E8;&#x5173;&#x952E;&#x70B9;</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="231-&#x6A21;&#x578B;&#x63A8;&#x7406;">2.3.1. &#x6A21;&#x578B;&#x63A8;&#x7406;</h3>
+<h3 id="1-&#x6A21;&#x578B;&#x52A0;&#x8F7D;">1. &#x6A21;&#x578B;&#x52A0;&#x8F7D;</h3>
+<p><strong>&#x6B65;&#x9AA4;&#x5206;&#x6790;&#xFF1A;</strong></p>
+<ul>
+<li><p>1.&#x52A0;&#x8F7D;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</p>
+</li>
+<li><p>2.&#x52A0;&#x8F7D;&#x6743;&#x503C;&#x6587;&#x4EF6;</p>
+</li>
+</ul>
+<p><strong>&#x4EE3;&#x7801;&#x5B9E;&#x73B0;</strong></p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> cv2
+
+<span class="hljs-comment"># 1.&#x6A21;&#x578B;&#x7ED3;&#x6784;&#x6587;&#x4EF6;</span>
+protoFile = <span class="hljs-string">&quot;hand/pose_deploy.prototxt&quot;</span>
+<span class="hljs-comment"># 2.&#x6A21;&#x578B;&#x6743;&#x503C;&#x6587;&#x4EF6;</span>
+weightsFile = <span class="hljs-string">&quot;hand/pose_iter_102000.caffemodel&quot;</span>
+<span class="hljs-comment"># opencv&#x52A0;&#x8F7D;&#x6A21;&#x578B;</span>
+net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
+</code></pre>
+<h3 id="2-&#x56FE;&#x7247;&#x9884;&#x5904;&#x7406;">2. &#x56FE;&#x7247;&#x9884;&#x5904;&#x7406;</h3>
+<p><strong>&#x6B65;&#x9AA4;&#x5206;&#x6790;&#xFF1A;</strong></p>
+<ul>
+<li><p>1.&#x8BFB;&#x53D6;&#x539F;&#x59CB;&#x56FE;&#x7247;</p>
+</li>
+<li><p>2.&#x8BBE;&#x7F6E;&#x653E;&#x7F29;&#x6BD4;&#x4F8B;</p>
+</li>
+<li><p>3.&#x56FE;&#x7247;&#x653E;&#x7F29;</p>
+</li>
+</ul>
+<p><strong>&#x4EE3;&#x7801;&#x5B9E;&#x73B0;</strong></p>
+<pre><code class="lang-python">    <span class="hljs-comment"># 1.&#x8BFB;&#x53D6;&#x539F;&#x59CB;&#x56FE;&#x7247;</span>
+    frame = cv2.imread(img_path)
+    frameCopy = np.copy(frame)
+    <span class="hljs-comment"># &#x56FE;&#x7247;&#x5BBD;</span>
+    frameWidth = frame.shape[<span class="hljs-number">1</span>]
+    <span class="hljs-comment"># &#x56FE;&#x7247;&#x9AD8;</span>
+    frameHeight = frame.shape[<span class="hljs-number">0</span>]
+    <span class="hljs-comment"># 2.&#x56FE;&#x7247;&#x5BBD;&#x9AD8;&#x6BD4;</span>
+    aspect_ratio = frameWidth/frameHeight
+
+    <span class="hljs-comment"># 3.&#x56FE;&#x7247;&#x653E;&#x7F29;</span>
+    inHeight = <span class="hljs-number">368</span>
+    inWidth = int(aspect_ratio*inHeight)
+    inpBlob = cv2.dnn.blobFromImage(frame, <span class="hljs-number">1.0</span> / <span class="hljs-number">255</span>, (inWidth, inHeight), (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>), swapRB=<span class="hljs-keyword">False</span>, crop=<span class="hljs-keyword">False</span>)
+</code></pre>
+<h3 id="3-&#x6A21;&#x578B;&#x524D;&#x5411;&#x63A8;&#x7406;">3. &#x6A21;&#x578B;&#x524D;&#x5411;&#x63A8;&#x7406;</h3>
+<p>&#x6A21;&#x578B;&#x8F93;&#x51FA;&#x6709;22&#x4E2A;&#x77E9;&#x9635;&#xFF0C;&#x6BCF;&#x4E2A;&#x77E9;&#x9635;&#x662F;&#x5173;&#x952E;&#x70B9;&#x7684;&#x6982;&#x7387;&#x56FE;</p>
+<p><strong>&#x6B65;&#x9AA4;&#x5206;&#x6790;&#xFF1A;</strong></p>
+<ul>
+<li>1.&#x8F93;&#x5165;&#x56FE;&#x7247;&#x5230;&#x6A21;&#x578B;</li>
+<li>2.&#x6A21;&#x578B;&#x524D;&#x5411;&#x4F20;&#x64AD;</li>
+</ul>
+<p><strong>&#x4EE3;&#x7801;&#x5B9E;&#x73B0;</strong></p>
+<pre><code class="lang-python">    <span class="hljs-comment"># 1.&#x8F93;&#x5165;&#x56FE;&#x7247;&#x5230;&#x6A21;&#x578B;</span>
+    net.setInput(inpBlob)
+    <span class="hljs-comment"># 2.&#x6A21;&#x578B;&#x524D;&#x5411;&#x4F20;&#x64AD;</span>
+    output = net.forward()
+    print(output.shape)
+</code></pre>
+<h3 id="4-&#x5BFB;&#x627E;&#x5173;&#x952E;&#x70B9;">4. &#x5BFB;&#x627E;&#x5173;&#x952E;&#x70B9;</h3>
+<p>&#x4E3A;&#x4E86;&#x627E;&#x5230;&#x786E;&#x5207;&#x7684;&#x5173;&#x952E;&#x70B9;&#xFF0C;&#x9996;&#x5148;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x6982;&#x7387;&#x56FE;&#x7F29;&#x653E;&#x5230;&#x539F;&#x59CB;&#x56FE;&#x50CF;&#x7684;&#x5927;&#x5C0F;&#x3002;&#x7136;&#x540E;&#x901A;&#x8FC7;&#x67E5;&#x627E;&#x6982;&#x7387;&#x56FE;&#x7684;&#x6700;&#x5927;&#x503C;&#x6765;&#x627E;&#x5230;&#x5173;&#x952E;&#x70B9;&#x7684;&#x4F4D;&#x7F6E;</p>
+<p><strong>&#x6B65;&#x9AA4;&#x5206;&#x6790;&#xFF1A;</strong></p>
+<ul>
+<li>1.&#x83B7;&#x53D6;22&#x4E2A;&#x5173;&#x952E;&#x70B9;&#x77E9;&#x9635;&#x6982;&#x7387;&#x56FE;</li>
+<li>2.&#x67E5;&#x627E;&#x6BCF;&#x4E2A;&#x5173;&#x952E;&#x70B9;&#x6982;&#x7387;&#x56FE;&#x7684;&#x6700;&#x5927;&#x503C;&#x548C;&#x5750;&#x6807;</li>
+</ul>
+<p><strong>&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#xFF1A;</strong></p>
+<pre><code class="lang-python">    nPoints = <span class="hljs-number">22</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(nPoints):
+        <span class="hljs-comment"># 1.&#x83B7;&#x53D6;22&#x4E2A;&#x5173;&#x952E;&#x70B9;&#x77E9;&#x9635;&#x6982;&#x7387;&#x56FE;</span>
+        probMap = output[<span class="hljs-number">0</span>, i, :, :]
+        probMap = cv2.resize(probMap, (frameWidth, frameHeight))
+
+        <span class="hljs-comment"># 2.&#x67E5;&#x627E;&#x6BCF;&#x4E2A;&#x5173;&#x952E;&#x70B9;&#x6982;&#x7387;&#x56FE;&#x7684;&#x6700;&#x5927;&#x503C;&#x548C;&#x5750;&#x6807;</span>
+        min_val,max_val,min_indx,max_indx = cv2.minMaxLoc(probMap)
+</code></pre>
+<h3 id="5-&#x7ED8;&#x5236;&#x5173;&#x952E;&#x70B9;&#x548C;&#x7F16;&#x53F7;">5. &#x7ED8;&#x5236;&#x5173;&#x952E;&#x70B9;&#x548C;&#x7F16;&#x53F7;</h3>
+<p>&#x7ED8;&#x5236;&#x68C0;&#x6D4B;&#x5230;&#x7684;&#x5173;&#x952E;&#x70B9;&#x4EE5;&#x53CA;&#x5173;&#x952E;&#x70B9;&#x5728;&#x56FE;&#x50CF;&#x4E0A;&#x5BF9;&#x5E94;&#x7684;&#x7F16;&#x53F7;</p>
+<p><strong>&#x6B65;&#x9AA4;&#x5206;&#x6790;&#xFF1A;</strong></p>
+<ul>
+<li>1.&#x9608;&#x503C;&#x8FC7;&#x6EE4;</li>
+<li>2.&#x7ED8;&#x5236;&#x5173;&#x952E;&#x70B9;</li>
+<li>3.&#x7ED8;&#x5236;&#x7F16;&#x53F7;</li>
+</ul>
+<p><strong>&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#xFF1A;</strong></p>
+<pre><code class="lang-python">points = []
+<span class="hljs-comment"># &#x8BBE;&#x5B9A;&#x8FC7;&#x6EE4;&#x9608;&#x503C;</span>
+threshold = <span class="hljs-number">0.1</span>
+<span class="hljs-comment"># 1.&#x9608;&#x503C;&#x8FC7;&#x6EE4;</span>
+<span class="hljs-keyword">if</span> max_val &gt; threshold :
+    <span class="hljs-comment"># 2.&#x7ED8;&#x5236;&#x5173;&#x952E;&#x70B9;</span>
+    cv2.circle(frameCopy, (max_indx[<span class="hljs-number">0</span>], max_indx[<span class="hljs-number">1</span>]), <span class="hljs-number">8</span>, (<span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>), thickness=<span class="hljs-number">-1</span>, lineType=cv2.FILLED)
+    <span class="hljs-number">3.</span>&#x7ED8;&#x5236;&#x7F16;&#x53F7;
+    cv2.putText(frameCopy, <span class="hljs-string">&quot;{}&quot;</span>.format(i), (max_indx[<span class="hljs-number">0</span>], max_indx[<span class="hljs-number">1</span>]), cv2.FONT_HERSHEY_SIMPLEX, <span class="hljs-number">1</span>, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>), <span class="hljs-number">2</span>, lineType=cv2.LINE_AA)
+
+    points.append((point[<span class="hljs-number">0</span>], point[<span class="hljs-number">1</span>]))
+<span class="hljs-keyword">else</span> :
+    points.append(<span class="hljs-keyword">None</span>)
+<span class="hljs-comment"># &#x4FDD;&#x5B58;&#x5173;&#x952E;&#x70B9;&#x56FE;&#x7247;    </span>
+cv2.imwrite(<span class="hljs-string">&apos;Keypoints.jpg&apos;</span>, frameCopy)
+</code></pre>
+<h3 id="6-&#x7ED8;&#x5236;&#x5173;&#x952E;&#x70B9;&#x6761;&#x7EBF;">6. &#x7ED8;&#x5236;&#x5173;&#x952E;&#x70B9;&#x6761;&#x7EBF;</h3>
+<p>&#x628A;&#x68C0;&#x6D4B;&#x5230;&#x7684;&#x5173;&#x952E;&#x70B9;&#x5F62;&#x6210;&#x7684;&#x9AA8;&#x67B6;&#x7ED8;&#x5236;&#x5728;&#x56FE;&#x50CF;&#x4E0A;</p>
+<p><strong>&#x6B65;&#x9AA4;&#x5206;&#x6790;&#xFF1A;</strong></p>
+<ul>
+<li>1.&#x8BBE;&#x7F6E;&#x5173;&#x952E;&#x70B9;&#x8FDE;&#x63A5;&#x7EBF;&#x5750;&#x6807;</li>
+<li>2.&#x7ED8;&#x5236;&#x8FDE;&#x7EBF;</li>
+<li>3.&#x7ED8;&#x5236;&#x5173;&#x952E;&#x70B9;</li>
+</ul>
+<p><strong>&#x4EE3;&#x7801;&#x5206;&#x6790;&#xFF1A;</strong></p>
+<pre><code class="lang-python"><span class="hljs-comment"># 1.&#x8BBE;&#x7F6E;&#x5173;&#x952E;&#x70B9;&#x8FDE;&#x63A5;&#x7EBF;&#x5750;&#x6807;</span>
+<span class="hljs-comment"># [0,1],[1,2],[2,3],[3,4]&#xFF1A;&#x5927;&#x62C7;&#x6307;</span>
+<span class="hljs-comment"># [0,5],[5,6],[6,7],[7,8]&#xFF1A;&#x98DF;&#x6307;</span>
+<span class="hljs-comment"># [0,9],[9,10],[10,11],[11,12]&#xFF1A;&#x4E2D;&#x6307;</span>
+<span class="hljs-comment"># [0,13],[13,14],[14,15],[15,16]&#xFF1A;&#x65E0;&#x540D;&#x6307;</span>
+<span class="hljs-comment"># [0,17],[17,18],[18,19],[19,20]&#xFF1A;&#x5C0F;&#x62C7;&#x6307;</span>
+POSE_PAIRS = [ [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>],[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">5</span>],[<span class="hljs-number">5</span>,<span class="hljs-number">6</span>],[<span class="hljs-number">6</span>,<span class="hljs-number">7</span>],[<span class="hljs-number">7</span>,<span class="hljs-number">8</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">9</span>],[<span class="hljs-number">9</span>,<span class="hljs-number">10</span>],[<span class="hljs-number">10</span>,<span class="hljs-number">11</span>],[<span class="hljs-number">11</span>,<span class="hljs-number">12</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">13</span>],[<span class="hljs-number">13</span>,<span class="hljs-number">14</span>],[<span class="hljs-number">14</span>,<span class="hljs-number">15</span>],[<span class="hljs-number">15</span>,<span class="hljs-number">16</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">17</span>],[<span class="hljs-number">17</span>,<span class="hljs-number">18</span>],[<span class="hljs-number">18</span>,<span class="hljs-number">19</span>],[<span class="hljs-number">19</span>,<span class="hljs-number">20</span>] ]
+
+<span class="hljs-keyword">for</span> pair <span class="hljs-keyword">in</span> POSE_PAIRS:
+    partA = pair[<span class="hljs-number">0</span>]
+    partB = pair[<span class="hljs-number">1</span>]
+    <span class="hljs-keyword">if</span> points[partA] <span class="hljs-keyword">and</span> points[partB]:
+        <span class="hljs-comment"># 2.&#x7ED8;&#x5236;&#x8FDE;&#x7EBF;</span>
+        cv2.line(frame, points[partA], points[partB], (<span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>), <span class="hljs-number">2</span>)
+        <span class="hljs-comment"># 3.&#x7ED8;&#x5236;&#x5173;&#x952E;&#x70B9;</span>
+        cv2.circle(frame, points[partA], <span class="hljs-number">8</span>, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>), thickness=<span class="hljs-number">-1</span>, lineType=cv2.FILLED)
+        cv2.circle(frame, points[partB], <span class="hljs-number">8</span>, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>), thickness=<span class="hljs-number">-1</span>, lineType=cv2.FILLED)
+<span class="hljs-comment"># &#x4FDD;&#x5B58;&#x56FE;&#x7247;</span>
+cv2.imwrite(<span class="hljs-string">&apos;line.jpg&apos;</span>, frame)
+</code></pre>
+<h3 id="&#x6A21;&#x578B;&#x63A8;&#x7406;&#x5B8C;&#x6574;&#x4EE3;&#x7801;">&#x6A21;&#x578B;&#x63A8;&#x7406;&#x5B8C;&#x6574;&#x4EE3;&#x7801;</h3>
+<p><strong>&#x6B65;&#x9AA4;&#x5206;&#x6790;&#xFF1A;</strong></p>
+<ul>
+<li>1.&#x6A21;&#x578B;&#x52A0;&#x8F7D;</li>
+<li>2.&#x56FE;&#x7247;&#x9884;&#x5904;&#x7406;</li>
+<li>3.&#x6A21;&#x578B;&#x524D;&#x5411;&#x63A8;&#x7406;</li>
+<li>4.&#x5BFB;&#x627E;&#x5173;&#x952E;&#x70B9;</li>
+<li>5.&#x7ED8;&#x5236;&#x5173;&#x952E;&#x70B9;&#x548C;&#x7F16;&#x53F7;</li>
+<li>6.&#x7ED8;&#x5236;&#x5173;&#x952E;&#x70B9;&#x6761;&#x7EBF;</li>
+</ul>
+<p><strong>&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#xFF1A;</strong></p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> cv2
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+<span class="hljs-comment"># 1.&#x6A21;&#x578B;&#x52A0;&#x8F7D;</span>
+protoFile = <span class="hljs-string">&quot;hand/pose_deploy.prototxt&quot;</span>
+weightsFile = <span class="hljs-string">&quot;hand/pose_iter_102000.caffemodel&quot;</span>
+net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
+
+<span class="hljs-comment"># 2.&#x56FE;&#x7247;&#x9884;&#x5904;&#x7406;</span>
+frame = cv2.imread(<span class="hljs-string">&apos;images/00000.jpeg&apos;</span>)
+frameCopy = np.copy(frame)
+frameWidth = frame.shape[<span class="hljs-number">1</span>]
+frameHeight = frame.shape[<span class="hljs-number">0</span>]
+aspect_ratio = frameWidth/frameHeight
+inHeight = <span class="hljs-number">368</span>
+inWidth = int(aspect_ratio*inHeight)
+inpBlob = cv2.dnn.blobFromImage(frame, <span class="hljs-number">1.0</span> / <span class="hljs-number">255</span>, (inWidth, inHeight), (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>), swapRB=<span class="hljs-keyword">False</span>, crop=<span class="hljs-keyword">False</span>)
+
+<span class="hljs-comment"># 3.&#x6A21;&#x578B;&#x524D;&#x5411;&#x63A8;&#x7406;</span>
+net.setInput(inpBlob)
+output = net.forward()
+
+
+<span class="hljs-comment"># 4.&#x5BFB;&#x627E;&#x5173;&#x952E;&#x70B9;</span>
+points = []
+nPoints = <span class="hljs-number">22</span>
+threshold = <span class="hljs-number">0.1</span>
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(nPoints):
+
+    probMap = output[<span class="hljs-number">0</span>, i, :, :]
+    probMap = cv2.resize(probMap, (frameWidth, frameHeight))
+    min_val,max_val,min_indx,max_indx = cv2.minMaxLoc(probMap)
+
+    <span class="hljs-comment"># 5.&#x7ED8;&#x5236;&#x5173;&#x952E;&#x70B9;&#x548C;&#x7F16;&#x53F7;</span>
+    <span class="hljs-keyword">if</span> max_val &gt; threshold:
+        cv2.circle(frameCopy, (max_indx[<span class="hljs-number">0</span>], max_indx[<span class="hljs-number">1</span>]), <span class="hljs-number">8</span>, (<span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>), thickness=<span class="hljs-number">-1</span>, lineType=cv2.FILLED)
+        cv2.putText(frameCopy, <span class="hljs-string">&quot;{}&quot;</span>.format(i), (max_indx[<span class="hljs-number">0</span>], max_indx[<span class="hljs-number">1</span>]), cv2.FONT_HERSHEY_SIMPLEX, <span class="hljs-number">1</span>, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>), <span class="hljs-number">2</span>, lineType=cv2.LINE_AA)
+
+        points.append((max_indx[<span class="hljs-number">0</span>], max_indx[<span class="hljs-number">1</span>]))
+    <span class="hljs-keyword">else</span>:
+        print(max_val,i)
+        points.append(<span class="hljs-keyword">None</span>)
+
+<span class="hljs-comment"># 6.&#x7ED8;&#x5236;&#x5173;&#x952E;&#x70B9;&#x6761;&#x7EBF;</span>
+POSE_PAIRS = [ [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>],[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">5</span>],[<span class="hljs-number">5</span>,<span class="hljs-number">6</span>],[<span class="hljs-number">6</span>,<span class="hljs-number">7</span>],[<span class="hljs-number">7</span>,<span class="hljs-number">8</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">9</span>],[<span class="hljs-number">9</span>,<span class="hljs-number">10</span>],[<span class="hljs-number">10</span>,<span class="hljs-number">11</span>],[<span class="hljs-number">11</span>,<span class="hljs-number">12</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">13</span>],[<span class="hljs-number">13</span>,<span class="hljs-number">14</span>],[<span class="hljs-number">14</span>,<span class="hljs-number">15</span>],[<span class="hljs-number">15</span>,<span class="hljs-number">16</span>],[<span class="hljs-number">0</span>,<span class="hljs-number">17</span>],[<span class="hljs-number">17</span>,<span class="hljs-number">18</span>],[<span class="hljs-number">18</span>,<span class="hljs-number">19</span>],[<span class="hljs-number">19</span>,<span class="hljs-number">20</span>] ]
+
+<span class="hljs-keyword">for</span> pair <span class="hljs-keyword">in</span> POSE_PAIRS:
+    partA = pair[<span class="hljs-number">0</span>]
+    partB = pair[<span class="hljs-number">1</span>]
+
+    <span class="hljs-keyword">if</span> points[partA] <span class="hljs-keyword">and</span> points[partB]:
+        cv2.line(frame, points[partA], points[partB], (<span class="hljs-number">0</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>), <span class="hljs-number">2</span>)
+        cv2.circle(frame, points[partA], <span class="hljs-number">8</span>, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>), thickness=<span class="hljs-number">-1</span>, lineType=cv2.FILLED)
+        cv2.circle(frame, points[partB], <span class="hljs-number">8</span>, (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>), thickness=<span class="hljs-number">-1</span>, lineType=cv2.FILLED)
+
+<span class="hljs-comment"># &#x4FDD;&#x5B58;&#x56FE;&#x7247;</span>
+cv2.imwrite(<span class="hljs-string">&apos;Keypoints.jpg&apos;</span>, frameCopy)
+cv2.imwrite(<span class="hljs-string">&apos;lines.jpg&apos;</span>, frame)
+</code></pre>
+<hr>
+<h3 id="232-&#x603B;&#x7ED3;">2.3.2. &#x603B;&#x7ED3;</h3>
+<ul>
+<li>&#x5B8C;&#x6574;&#x7684;&#x6A21;&#x578B;&#x63A8;&#x7406;&#x8FC7;&#x7A0B;&#x5305;&#x62EC;&#xFF1A;&#x6A21;&#x578B;&#x52A0;&#x8F7D;&#x3001;&#x9884;&#x5904;&#x7406;&#x3001;&#x6A21;&#x578B;&#x524D;&#x5411;&#x4F20;&#x64AD;&#x3001;&#x7ED3;&#x679C;&#x5904;&#x7406;&#x7B49;</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="2.2.模型环境搭建.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 2.2. 模型环境搭建">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"2.3. 模型推理","level":"1.3.3","depth":2,"previous":{"title":"2.2. 模型环境搭建","level":"1.3.2","depth":2,"path":"chapter2/2.2.模型环境搭建.md","ref":"chapter2/2.2.模型环境搭建.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters","katex","splitter"],"pluginsConfig":{"splitter":{},"search":{},"lunr":{"maxIndexSize":1000000},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"expandable-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter2/2.3.模型推理.md","mtime":"2020-05-28T15:31:39.276Z","type":"markdown"},"gitbook":{"version":"3.0.0","time":"2020-05-28T15:32:08.685Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/buttons.js"></script>
+        
+    
+
+    </body>
+</html>
+
