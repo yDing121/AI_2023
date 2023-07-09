@@ -4,12 +4,17 @@ import cv2
 import time
 import numpy as np
 from makeTraining import relative_coord, rotate, flip, normalize
+import tkinter as tk
+from PIL import ImageTk, Image
+import os
 
 ANSDICT = {
     0: "Rock",
     1: "Paper",
     2: "Scissors"
 }
+
+
 def preprocess(
         imgname,
         thresh=0.1,
@@ -101,5 +106,56 @@ def infer(img, thresh=0.1):
 
 if __name__ == "__main__":
     m = tf.keras.models.load_model("./stable_model")
+    # print(infer("./images/1.jpg"))
 
-    print(infer("./images/1.jpg"))
+    # List of pictures
+    infPath = "./demo_images/"
+    pictures = os.listdir(infPath)
+
+    # --------------- tkinter app for inference with loopback ----------------
+    # Picture counter
+    current_picture = 0
+
+
+    def change_picture():
+        global current_picture
+        current_picture = (current_picture + 1) % len(pictures)
+        img = Image.open(f"{infPath}{pictures[current_picture]}")
+        img.thumbnail((400, 400))
+        img_tk = ImageTk.PhotoImage(img)
+        picture_label.configure(image=img_tk)
+        picture_label.image = img_tk
+        text_label.configure(text=f"File: {pictures[current_picture]}")
+
+
+    def infer_pressed():
+        res = infer(f"{infPath}{pictures[current_picture]}")
+        result_label.configure(text=f"Result: {res}")
+
+
+    window = tk.Tk()
+
+    # Picture
+    img = Image.open(f"{infPath}{pictures[current_picture]}")
+    img.thumbnail((400, 400))
+    img_tk = ImageTk.PhotoImage(img)
+    picture_label = tk.Label(window, image=img_tk)
+    picture_label.pack()
+
+    # Picture number label
+    text_label = tk.Label(window, text=f"File: {pictures[current_picture]}")
+    text_label.pack()
+
+    # Next picture button
+    next_button = tk.Button(window, text="Next Picture", command=change_picture)
+    next_button.pack(side=tk.RIGHT)
+
+    # Infer button
+    infer_button = tk.Button(window, text="Infer", command=infer_pressed)
+    infer_button.pack(side=tk.LEFT)
+
+    # Inference results label
+    result_label = tk.Label(window, text="Inference Result:")
+    result_label.pack()
+
+    window.mainloop()
