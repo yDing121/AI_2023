@@ -120,101 +120,102 @@ def flip(vec_rotated):
     return vec_rotated
 
 
-with open("train.csv", "w") as fin:
-    fin.write("fname")
-    for i in range(21):
-        fin.write(f",p{i}_x,p{i}_y")
-    fin.write("\n")
+if __name__ == "__main__":
+    with open("train.csv", "w") as fin:
+        fin.write("fname")
+        for i in range(21):
+            fin.write(f",p{i}_x,p{i}_y")
+        fin.write("\n")
 
-# Vectorize relative coordinates function
-relative_coord = np.vectorize(relative_coord)
+    # Vectorize relative coordinates function
+    relative_coord = np.vectorize(relative_coord)
 
-# Main
-fin = open("train.csv", "a+")
-for img in os.listdir(traindata_path):
-    if ".py" in img or "." not in img:
-        continue
-    print("\n" + img)
-    frame = cv2.imread(traindata_path + img)
-    frameCopy = np.copy(frame)
-    frameWidth = frame.shape[1]
-    frameHeight = frame.shape[0]
-    aspect_ratio = frameWidth/frameHeight
-    threshold = 0.1
+    # Main
+    fin = open("train.csv", "a+")
+    for img in os.listdir(traindata_path):
+        if ".py" in img or "." not in img:
+            continue
+        print("\n" + img)
+        frame = cv2.imread(traindata_path + img)
+        frameCopy = np.copy(frame)
+        frameWidth = frame.shape[1]
+        frameHeight = frame.shape[0]
+        aspect_ratio = frameWidth/frameHeight
+        threshold = 0.1
 
-    t = time.time()
-    # input image dimensions for the network
-    inHeight = 368
-    inWidth = int(((aspect_ratio*inHeight)*8)//8)
-    inpBlob = cv2.dnn.blobFromImage(frame, 1.0 / 255, (inWidth, inHeight), (0, 0, 0), swapRB=False, crop=False)
+        t = time.time()
+        # input image dimensions for the network
+        inHeight = 368
+        inWidth = int(((aspect_ratio*inHeight)*8)//8)
+        inpBlob = cv2.dnn.blobFromImage(frame, 1.0 / 255, (inWidth, inHeight), (0, 0, 0), swapRB=False, crop=False)
 
-    net.setInput(inpBlob)
+        net.setInput(inpBlob)
 
-    output = net.forward()
-    print("time taken by network : {:.3f}".format(time.time() - t))
+        output = net.forward()
+        print("time taken by network : {:.3f}".format(time.time() - t))
 
-    # Empty list to store the detected keypoints
-    points = []
+        # Empty list to store the detected keypoints
+        points = []
 
-    for i in range(nPoints):
-        # confidence map of corresponding body's part.
-        probMap = output[0, i, :, :]
-        probMap = cv2.resize(probMap, (frameWidth, frameHeight))
+        for i in range(nPoints):
+            # confidence map of corresponding body's part.
+            probMap = output[0, i, :, :]
+            probMap = cv2.resize(probMap, (frameWidth, frameHeight))
 
-        # Find global maxima of the probMap.
-        minVal, prob, minLoc, point = cv2.minMaxLoc(probMap)
+            # Find global maxima of the probMap.
+            minVal, prob, minLoc, point = cv2.minMaxLoc(probMap)
 
-        if prob > threshold:
-            cv2.circle(frameCopy, (int(point[0]), int(point[1])), 8, (0, 255, 255), thickness=-1, lineType=cv2.FILLED)
-            cv2.putText(frameCopy, "{}".format(i), (int(point[0]), int(point[1])), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, lineType=cv2.LINE_AA)
+            if prob > threshold:
+                cv2.circle(frameCopy, (int(point[0]), int(point[1])), 8, (0, 255, 255), thickness=-1, lineType=cv2.FILLED)
+                cv2.putText(frameCopy, "{}".format(i), (int(point[0]), int(point[1])), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, lineType=cv2.LINE_AA)
 
-            # Add the point to the list if the probability is greater than the threshold
-            points.append((int(point[0]), int(point[1])))
-        else:
-            points.append(None)
+                # Add the point to the list if the probability is greater than the threshold
+                points.append((int(point[0]), int(point[1])))
+            else:
+                points.append(None)
 
-    # Not all points detected
-    if None in points[:21]:
-        print(f"Low confidence, passing {img}")
-        continue
+        # Not all points detected
+        if None in points[:21]:
+            print(f"Low confidence, passing {img}")
+            continue
 
-    # ---------------------Preprocess---------------------
-    # Relative
-    newpoints = np.array(points[:21], dtype=float)
-    origin = newpoints[0]
-    relcoords = relative_coord(origin, newpoints)
+        # ---------------------Preprocess---------------------
+        # Relative
+        newpoints = np.array(points[:21], dtype=float)
+        origin = newpoints[0]
+        relcoords = relative_coord(origin, newpoints)
 
-    # Rotate
-    relcoords = rotate(relcoords, move_og0=False, og0=np.array((points[0])), down=True)
+        # Rotate
+        relcoords = rotate(relcoords, move_og0=False, og0=np.array((points[0])), down=True)
 
-    # Display
-    dispcoords = relcoords.astype("int32") + points[0]
+        # Display
+        dispcoords = relcoords.astype("int32") + points[0]
 
-    # Flip if (1) is on the right of (0)
-    relcoords = flip(relcoords)
+        # Flip if (1) is on the right of (0)
+        relcoords = flip(relcoords)
 
-    # Flatten
-    normcoords = normalize(relcoords).flatten()
+        # Flatten
+        normcoords = normalize(relcoords).flatten()
 
-    # --------------------- End Preprocess ---------------------
-    # print(f"id:{img} \n{normcoords.flatten()}")
-    fin.write(f"{img},"+",".join(map(str, normcoords.tolist()))+"\n")
+        # --------------------- End Preprocess ---------------------
+        # print(f"id:{img} \n{normcoords.flatten()}")
+        fin.write(f"{img},"+",".join(map(str, normcoords.tolist()))+"\n")
 
-    # Draw Skeleton
-    for pair in POSE_PAIRS:
-        partA = pair[0]
-        partB = pair[1]
+        # Draw Skeleton
+        for pair in POSE_PAIRS:
+            partA = pair[0]
+            partB = pair[1]
 
-        # if points[partA] and points[partB]:
-        cv2.line(frame, points[partA], points[partB], (255, 0, 255), 1)
-        cv2.circle(frame, points[partA], 4, (255, 0, 0), thickness=-1, lineType=cv2.FILLED)
-        cv2.circle(frame, points[partB], 4, (255, 0, 0), thickness=-1, lineType=cv2.FILLED)
+            # if points[partA] and points[partB]:
+            cv2.line(frame, points[partA], points[partB], (255, 0, 255), 1)
+            cv2.circle(frame, points[partA], 4, (255, 0, 0), thickness=-1, lineType=cv2.FILLED)
+            cv2.circle(frame, points[partB], 4, (255, 0, 0), thickness=-1, lineType=cv2.FILLED)
 
-        # if relcoords[partA] and relcoords[partB]:
-        cv2.line(frame, tuple(dispcoords[partA]), tuple(dispcoords[partB]), (0, 255, 255), 2)
-        cv2.circle(frame, tuple(dispcoords[partA]), 8, (0, 0, 255), thickness=-1, lineType=cv2.FILLED)
-        cv2.circle(frame, tuple(dispcoords[partB]), 8, (0, 0, 255), thickness=-1, lineType=cv2.FILLED)
+            # if relcoords[partA] and relcoords[partB]:
+            cv2.line(frame, tuple(dispcoords[partA]), tuple(dispcoords[partB]), (0, 255, 255), 2)
+            cv2.circle(frame, tuple(dispcoords[partA]), 8, (0, 0, 255), thickness=-1, lineType=cv2.FILLED)
+            cv2.circle(frame, tuple(dispcoords[partB]), 8, (0, 0, 255), thickness=-1, lineType=cv2.FILLED)
 
-    cv2.imwrite('results/' + img, frame)
-    print("Total time taken : {:.3f}".format(time.time() - t))
-fin.close()
+        cv2.imwrite('results/' + img, frame)
+        print("Total time taken : {:.3f}".format(time.time() - t))
+    fin.close()

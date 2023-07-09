@@ -72,6 +72,11 @@ history = model.fit(
 # Evaluation
 model.evaluate(x_test, y_test)
 
+# Export
+plot_model(model, show_shapes=True)
+path = "./test_model"
+model.save(path)
+
 # Graph
 acc = history.history['accuracy']
 loss = history.history['loss']
@@ -83,10 +88,6 @@ plt.plot(epochs, loss, 'r+-', label='Training Loss')
 plt.title('Training Accuracy and Loss')
 plt.xlabel('Epochs')
 plt.legend()
-plt.savefig('history.png')
+plt.savefig(f'{path}/history.png')
 plt.show()
 
-# Export
-plot_model(model, show_shapes=True)
-path = "./test_model"
-model.save(path)
