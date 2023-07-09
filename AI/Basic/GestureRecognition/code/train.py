@@ -73,8 +73,8 @@ history = model.fit(
 model.evaluate(x_test, y_test)
 
 # Export
-plot_model(model, show_shapes=True)
 path = "./test_model"
+plot_model(model, to_file=f"{path}/architecture.png", show_shapes=True)
 model.save(path)
 
 # Graph

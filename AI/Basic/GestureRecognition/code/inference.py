@@ -95,9 +95,7 @@ def infer(img, thresh=0.1):
         print("Low confidence, cannot identify hand landmarks")
         return -1
     else:
-
         c = np.argmax(classify(points, model=m)).item()
-        # print(f"{type(c)}:\t{c}")
         return ANSDICT.get(c)
 
 
