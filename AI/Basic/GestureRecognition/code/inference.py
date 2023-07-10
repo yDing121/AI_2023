@@ -65,7 +65,7 @@ def preprocess(
     # Not all points detected
     if None in points[:21]:
         print(f"Low confidence, passing {imgname}")
-        return -1
+        return None
 
     # ---------------------Preprocess---------------------
     # Relative
@@ -114,7 +114,7 @@ def infer(img, thresh=0.1):
     points = preprocess(img,
                         thresh=thresh,
                         net=cv2.dnn.readNetFromCaffe("hand/pose_deploy.prototxt", "hand/pose_iter_102000.caffemodel"))
-    if type(points) == "<class 'int'>":
+    if points is None:
         print("Low confidence, cannot identify hand landmarks")
         return -1
     else:
@@ -152,14 +152,16 @@ if __name__ == "__main__":
             img = Image.open(f"{infPath}tmp.jpg")
             img.thumbnail((400, 400), Image.ANTIALIAS)
             img_tk = ImageTk.PhotoImage(img)
+            os.remove(f"{infPath}tmp.jpg")
             picture_label.configure(image=img_tk)
             picture_label.image = img_tk
         except FileNotFoundError:
+            print("No tmp to clear")
             return -1
 
 
     def infer_pressed():
-        res = infer(f"{infPath}{pictures[current_picture]}")
+        res = infer(f"{infPath}{pictures[current_picture]}", thresh=0.1)
         result_label.configure(text=f"Result: {res}")
 
 
@@ -189,7 +191,3 @@ if __name__ == "__main__":
     result_label.pack()
 
     window.mainloop()
-    try:
-        os.remove(f"{infPath}tmp.jpg")
-    except FileNotFoundError:
-        print("No tmp to clear")
