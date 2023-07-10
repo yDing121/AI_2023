@@ -3,7 +3,7 @@ import tensorflow as tf
 import cv2
 import time
 import numpy as np
-from makeTraining import relative_coord, rotate, flip, normalize
+from makeTraining import POSE_PAIRS, relative_coord, rotate, flip, normalize
 import tkinter as tk
 from PIL import ImageTk, Image
 import os
@@ -76,6 +76,9 @@ def preprocess(
     # Rotate
     relcoords = rotate(relcoords, move_og0=False, og0=np.array((points[0])), down=True)
 
+    # Display
+    dispcoords = relcoords.astype("int32") + points[0]
+
     # Flip if (1) is on the right of (0)
     relcoords = flip(relcoords)
 
@@ -83,6 +86,21 @@ def preprocess(
     normcoords = normalize(relcoords).flatten()
 
     # --------------------- End Preprocess ---------------------
+    # Draw Skeleton
+    for pair in POSE_PAIRS:
+        partA = pair[0]
+        partB = pair[1]
+
+        # if points[partA] and points[partB]:
+        cv2.line(frame, points[partA], points[partB], (255, 0, 255), 1)
+        cv2.circle(frame, points[partA], 4, (255, 0, 0), thickness=-1, lineType=cv2.FILLED)
+        cv2.circle(frame, points[partB], 4, (255, 0, 0), thickness=-1, lineType=cv2.FILLED)
+
+        # if relcoords[partA] and relcoords[partB]:
+        cv2.line(frame, tuple(dispcoords[partA]), tuple(dispcoords[partB]), (0, 255, 255), 2)
+        cv2.circle(frame, tuple(dispcoords[partA]), 8, (0, 0, 255), thickness=-1, lineType=cv2.FILLED)
+        cv2.circle(frame, tuple(dispcoords[partB]), 8, (0, 0, 255), thickness=-1, lineType=cv2.FILLED)
+    cv2.imwrite(f'{infPath}tmp.jpg', frame)
     return np.asarray([normcoords])
 
 
@@ -95,11 +113,12 @@ def infer(img, thresh=0.1):
     global ANSDICT
     points = preprocess(img,
                         thresh=thresh,
-                        net=cv2.dnn.readNetFromCaffe("hand/pose_deploy.prototxt","hand/pose_iter_102000.caffemodel"))
+                        net=cv2.dnn.readNetFromCaffe("hand/pose_deploy.prototxt", "hand/pose_iter_102000.caffemodel"))
     if type(points) == "<class 'int'>":
         print("Low confidence, cannot identify hand landmarks")
         return -1
     else:
+        infer_change_pic()
         c = np.argmax(classify(points, model=m)).item()
         return ANSDICT.get(c)
 
@@ -112,7 +131,7 @@ if __name__ == "__main__":
     infPath = "./demo_images/"
     pictures = os.listdir(infPath)
 
-    # --------------- tkinter app for inference with loopback ----------------
+    # --------------- tkinter app for inference with wraparound ----------------
     # Picture counter
     current_picture = 0
 
@@ -121,11 +140,22 @@ if __name__ == "__main__":
         global current_picture
         current_picture = (current_picture + 1) % len(pictures)
         img = Image.open(f"{infPath}{pictures[current_picture]}")
-        img.thumbnail((400, 400))
+        img.thumbnail((400, 400), Image.ANTIALIAS)
         img_tk = ImageTk.PhotoImage(img)
         picture_label.configure(image=img_tk)
         picture_label.image = img_tk
         text_label.configure(text=f"File: {pictures[current_picture]}")
+
+
+    def infer_change_pic():
+        try:
+            img = Image.open(f"{infPath}tmp.jpg")
+            img.thumbnail((400, 400), Image.ANTIALIAS)
+            img_tk = ImageTk.PhotoImage(img)
+            picture_label.configure(image=img_tk)
+            picture_label.image = img_tk
+        except FileNotFoundError:
+            return -1
 
 
     def infer_pressed():
@@ -137,7 +167,7 @@ if __name__ == "__main__":
 
     # Picture
     img = Image.open(f"{infPath}{pictures[current_picture]}")
-    img.thumbnail((400, 400))
+    img.thumbnail((400, 400), Image.ANTIALIAS)
     img_tk = ImageTk.PhotoImage(img)
     picture_label = tk.Label(window, image=img_tk)
     picture_label.pack()
@@ -159,3 +189,7 @@ if __name__ == "__main__":
     result_label.pack()
 
     window.mainloop()
+    try:
+        os.remove(f"{infPath}tmp.jpg")
+    except FileNotFoundError:
+        print("No tmp to clear")

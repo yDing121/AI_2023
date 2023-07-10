@@ -19,7 +19,7 @@ traindata_path = 'images/'
 
 def relative_coord(initial, target):
     """
-    Helper method for getting coordinates relative to (0) (x_n - x_0, y_n - y_0)
+    Helper method for getting coordinates relative to (0) (x_0 - x_n, y_0 - y_n)
     """
     return target - initial
 
@@ -77,22 +77,18 @@ def rotate(vec, move_og0=False, og0=None, down=True):
         if diff_x >= 0 and diff_y >= 0:
             # ++
             theta = -1 * (np.pi/2 + ac)
-            # theta = -1 * (np.pi/2 - ac)
             print("Q1")
         elif diff_x < 0 and diff_y >= 0:
             # -+
             theta = np.pi/2 + ac
-            # theta = np.pi/2 - ac
             print("Q2")
         elif diff_x < 0 and diff_y < 0:
             # --
             theta = np.pi/2 - ac
-            # theta = np.pi/2 + ac
             print("Q3")
         else:
             # +-
             theta = ac - np.pi/2
-            # theta = -1 * (np.pi/2 + ac)
             print("Q4")
     print(f"Arctan:\t{np.rad2deg(ac)}")
     print(f"Counter rotation angle:\t{np.rad2deg(theta)} degrees")

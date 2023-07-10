@@ -52,9 +52,7 @@ def next_picture():
         new_image = Image.open("./results/" + imgname)
 
         # Resize
-        canvas_width = 400
-        canvas_height = 400
-        new_image.thumbnail((canvas_width, canvas_height), Image.ANTIALIAS)
+        new_image.thumbnail((400, 400), Image.ANTIALIAS)
 
         image = ImageTk.PhotoImage(new_image)
         resized_image = new_image
